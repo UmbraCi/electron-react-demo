@@ -15,7 +15,7 @@ function Login() {
                 <Input.Password placeholder="密码" />
             </div>
             <div className="ipt-con">
-                <Button type="primary" block={true} onClick={()=>{navigate('home')}} >
+                <Button type="primary" block={true} onClick={()=>{navigate('/home')}} >
                     登录
                 </Button>
             </div>
