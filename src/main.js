@@ -1,5 +1,18 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
+
+
+/**
+ * 主进程和渲染双向通信
+ */
+async function handleOpen(){
+    const { canceled, filePaths } = await dialog.showOpenDialog()
+    if(canceled){
+        return
+    }else{
+        return filePaths[0]
+    }
+}
 
 
 const createWindow = () => {
@@ -14,9 +27,11 @@ const createWindow = () => {
 
     // 并且为你的应用加载index.html
     mainWindow.loadURL('http://localhost:3000')
+    mainWindow.openDevTools()
 }
 
 app.whenReady().then(()=>{
+    ipcMain.handle('dialog:openFile', handleOpen)
     createWindow();
     app.on('activate', () => {
         // 在macOS上，当单击dock图标并且没有其他窗口打开时，
