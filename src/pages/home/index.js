@@ -4,6 +4,11 @@ import { goto } from '@/api'
 import './home.less'
 import { useState } from 'react'
 
+
+
+const { ipcRenderer } = window.electron
+
+
 function Home() {
     const navigate = useNavigate()
 
@@ -14,11 +19,27 @@ function Home() {
         setFilePath(_filePath)
     }
 
+    const readDir = async ()=>{
+        ipcRenderer.send('readDir',{msg:'test'})
+        window.api.readDirReply((event,result)=>{
+            if(result.canceled){
+                console.log('取消')
+                return
+            }else{
+                console.log(result)
+            }
+        })
+    }
+
     return (
         <div className="P-home">
             <h1>Home Page</h1>
             <div className="ipt-con">
                    <Button onClick={openFile}>打开文件</Button>
+                   <span>{filePath}</span>
+            </div>
+            <div className="ipt-con">
+                   <Button onClick={readDir}>读取目标目录</Button>
                    <span>{filePath}</span>
             </div>
             <div className="ipt-con">

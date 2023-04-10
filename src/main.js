@@ -27,6 +27,7 @@ const createWindow = () => {
 
     // 并且为你的应用加载index.html
     mainWindow.loadURL('http://localhost:3000')
+    // mainWindow.webContents.openDevTools()
     mainWindow.openDevTools()
 }
 
@@ -50,3 +51,7 @@ app.on('window-all-closed', () => {
         app.quit()
     }
 })
+
+// 在当前文件中你可以引入所有的主进程代码
+// 也可以拆分成几个文件，然后用 require 导入。
+require('./ipcMain/readDir')

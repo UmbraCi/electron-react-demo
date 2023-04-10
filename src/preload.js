@@ -5,7 +5,16 @@ contextBridge.exposeInMainWorld('electron',{
     ipcRenderer
 })
 
-// contextBridge.exposeInIsolatedWorld('api',)
+contextBridge.exposeInMainWorld('api',{
+    readDirReply:(callback)=>{
+        ipcRenderer.once('readDir-reply',(event,result)=>{
+            callback(event,result)
+        })
+    }
+})
+
+
+
 contextBridge.exposeInMainWorld('electronAPI',{
     openFile:()=> ipcRenderer.invoke('dialog:openFile')
 })
