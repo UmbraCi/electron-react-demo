@@ -1,0 +1,10 @@
+electronVersion: 24.0.0
+binariesMirrors:
+  electron:
+    - https://npm.taobao.org/mirrors/electron/
+    - https://npmjs.com/mirrors/electron/
+    - https://github.com/electron/electron/releases/download/
+  chromium:
+    - https://npm.taobao.org/mirrors/chromium-browser-snapshots/
+    - https://npmjs.com/mirrors/chromium-browser-snapshots/
+    - https://commondatastorage.googleapis.com/chromium-browser-snapshots/
